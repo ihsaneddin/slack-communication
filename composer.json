@@ -1,0 +1,47 @@
+{
+    "name": "ihsaneddin/slack-communication",
+    "description": "slack communication better",
+    "type": "library",
+    "repositories": {
+        "slack-client": {
+            "type": "git",
+            "url": "git@github.com:ihsaneddin/slack-client.git"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3",
+        "fzaninotto/faker": "1.8.0",
+        "psy/psysh": "^0.9.9",
+        "illuminate/support": "^5.8"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ihsan",
+            "email": "ihsaneddin@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "botman/driver-slack": "^2.2",
+        "mpociot/slack-client": "1.2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ihsaneddin\\Slack\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ihsaneddin\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ihsaneddin\\Slack\\SlackServiceProvider"
+            ]
+        }
+    }
+}
