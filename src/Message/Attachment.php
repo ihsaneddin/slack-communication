@@ -69,12 +69,12 @@ class Attachment extends Attchmt {
   }
 
   public function setMarkdown(bool $mrkdwn){
-    $this->data['mrkdwn'] = $mrkdown;
+    $this->data['mrkdwn'] = $mrkdwn;
     return $this;
   }
 
   public function setTimestamp(int $ts){
-    $this->data["tx"] = $ts;
+    $this->data["ts"] = $ts;
     return $this;
   }
 
