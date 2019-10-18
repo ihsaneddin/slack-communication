@@ -16,17 +16,28 @@ class Client {
     $this->token = config("slack.token");
   }
 
+  public function setToken(string $token){
+    $this->token = $token;
+  }
+
   public function createLoop() : LoopInterface{
     return Factory::create();
   }
 
-  public function sendMessage(SlackMessageableInterface $messageable, string $token = null){
+  public function sendMessage(SlackMessageableInterface $messageable, string $thread = null, callable $then = null, callable $otherwise = null){
     $loop = $this->createLoop();
-    $token = is_null($token) ? $this->token : $token;
+    $token = $this->token;
     $client = $this->newApiClient($loop, $token);
     $message = $messageable->toSlackMessage();
-    $client->postMessage($message);
+    $promise = $client->postMessage($message, $thread);
+    if(is_callable($then)){
+      $promise->then($then);
+    }
+    if(is_callable($otherwise)){
+      $promise->otherwise($otherwise);
+    }
     $loop->run();
+    $loop->stop();
   }
 
   public function newApiClient(LoopInterface $loop, string $token = null) : ApiClient {
